@@ -1,0 +1,27 @@
+#creates a list with each row as a nested list in the list called rows
+def txt2rows(path_name):
+    fileref = open(path_name,"r")
+    content = fileref.readlines()
+    rows = list()
+    for row in content[1:]:
+        vals = row.strip().split(',')
+        rows.append(vals)
+    return rows
+
+#creates dictionary (res_dct) with the two columns which are needed to do the loopup from
+def Convert(lst):
+    res_dct = {lst[i][0]: lst[i][1] for i in range(0, len(lst))}
+    return res_dct
+
+rows1 = txt2rows(input("enter path name: "))   #input the path name in .txt format 
+dict1 =Convert(rows1)
+print(dict1)
+
+#lookup the list "lookup_lst" in the dict1(created in convert function) and returns a dictionary with the lookup list: its value 
+def lookup(lookup_lst):
+    lookup_dict = {x:dict1[x] for x in lookup_lst}
+    return lookup_dict
+    
+b = ['a','c']   #for example if we want to lookup the values for 'a' and 'c' in the lookup function 
+newdic = lookup(b)
+print(newdic)   
